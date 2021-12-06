@@ -2,6 +2,8 @@
 
 library(raster)
 library(RStoolbox)
+library(ggplot2)
+library(gridExtra)
 
 setwd("C:/lab/")
 
@@ -55,4 +57,30 @@ prop1992 <- c(0.8925729, 0.1074271)
 proportion1992 <- data.frame(cover, prop1992)
 
 ggplot(proportion1992, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white")
+
+# classification of 2006
+# Unsupervised classification
+l2006c <- unsuperClass(l2006, nClasses=2) # unsuperClass(x, nClasses) 
+l2006c
+
+plot(l2006c$map)
+
+# frequency ,the same of 1992
+
+total <- 341292
+propagri <- 34710/total
+propforest <- 306582/total
+
+proportion <- data.frame(cover, prop1992, prop2006)
+prop2006 <- c(0.8982982,0.1017018)
+proportion2006 <- data.frame(cover, prop2006)
+proportion <- data.frame(cover, prop1992, prop2006)
+ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white")
+
+# plotting all togheter
+p1 <- ggplot(proportion1992, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white")
+p2 <- ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white")
+ 
+grid.arrange(p1, p2, nrows=1)
+
 
