@@ -81,6 +81,37 @@ ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="ident
 p1 <- ggplot(proportion1992, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white")
 p2 <- ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white")
  
-grid.arrange(p1, p2, nrows=1)
+#plot two graphs with gridExtra package
+grid.arrange(p1, p2, nrow=1)
+
+# or use patchwork package
+p1+p2
+
+# instead of using plotRGB we are going to use ggRGB
+# common stuff :
+plotRGB(l1992, r=1, g=2, b=3, stretch="Lin")
+
+ggRGB(l1992, r=1,g=2,b=3,stretch="lin")
+ggRGB(l1992, r=1,g=2,b=3,stretch="hist")
+ggRGB(l1992, r=1,g=2,b=3,stretch="sqrt")
+ggRGB(l1992, r=1,g=2,b=3,stretch="log")
+
+# patchwork
+gp1 <- ggRGB(l1992, r=1,g=2,b=3,stretch="lin")
+gp2 <- ggRGB(l1992, r=1,g=2,b=3,stretch="hist")
+gp3 <- ggRGB(l1992, r=1,g=2,b=3,stretch="sqrt")
+gp4 <- ggRGB(l1992, r=1,g=2,b=3,stretch="log")
+
+gp1 <- ggRGB(l1992, r=1, g=2, b=3)
+gp5 <- ggRGB(l2006, r=1, g=2, b=3)
+  
+gp1 + gp5
+gp1 / gp5
+
+
+
+ 
+
+
 
 
