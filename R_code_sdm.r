@@ -1,9 +1,13 @@
 # R code for species distribution modelling, namely the distribution of individuals
 
 # install.packages("sdm")
+# install.packages(c("sdm","rgdal") for install more than one package
+
 library(sdm)
 library(raster) # predictors
 library(rgdal) # species
+
+#species data
 
 system.file("external/species.shp")
 
@@ -13,7 +17,49 @@ file
 shapefile() # exatcly as the raster function for raster files
 species <-  shapefile(file)
 
+# how many occurrences are there ?
+presences <- species[species$Occurrence == 1,]
+absences <- species [species$Occurrence == 0,]
+
+# plot!
 plot(species, pch=19, col=red)
+plot(species, pch=19,col="blue")
+plot(presences, pch=19, col="blue")
+plot(absences, pch=19, col="blue")
+
+#plot presences and absences
+plot(presences, pch=19, col="blue")
+points(absences, pch=19, col="red")
+
+# let's look at the predictors
+path <- system.file("external", package="sdm")
+
+lst<- list.files(path, pattern='asc')
+
+lst <- list.files(path, pattern='asc', full.names=T)
+lst
+
+preds <- stack(lst)
+preds
+
+cl <- colorRampPalette(c('blue','orange','red','yellow')) (100)
+plot(preds, col=cl) 
+
+plot(preds$elevation, col=cl)
+points(presences, pch=19)
+
+plot(preds$temperature, col=cl)
+points(presences, pch=19)
+
+
+plot(preds$vegetation, col=cl)
+points(presences, pch=19)
+
+plot(preds$precipitation, col=cl)
+points(presences, pch=19)
+
+
+
 
 
 
