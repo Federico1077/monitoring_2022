@@ -58,6 +58,21 @@ points(presences, pch=19)
 plot(preds$precipitation, col=cl)
 points(presences, pch=19)
 
+# day 2
+
+install.packages("sdm")
+
+setwd("C:/lab/")
+
+source("R_code_source_sdm.r")
+
+preds
+# these are the predictors: elevation,precipitation,temperature and vegetation
+
+# let's explain to the model what are the training and the predictors
+datasdm <- sdmData(train=species,predictors=preds)
+
+m1 <- sdm(Occurrence~temperature+elevation+precipitation+vegetation, data=datasdm, methods="glm")
 
 
 
