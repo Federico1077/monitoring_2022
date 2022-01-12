@@ -72,7 +72,25 @@ preds
 # let's explain to the model what are the training and the predictors
 datasdm <- sdmData(train=species,predictors=preds)
 
+#model
 m1 <- sdm(Occurrence~temperature+elevation+precipitation+vegetation, data=datasdm, methods="glm")
+
+#prediction
+p1 <- predict(m1,newdata=preds)
+p1
+
+plot(p1,col=cl)
+
+# stack everything together
+s1 <- stack(preds, p1)
+plot(s1, col=cl)
+
+#change the name of the model
+names(s1) <- c('elevation', 'precipitation', 'temperature', 'vegetation', 'model')
+plot(s1, col=cl)
+
+names(s1) <- c('Elevation', 'Precipitation', 'Temperature', 'Vegetation', 'Probability')
+plot(s1, col=cl)
 
 
 
