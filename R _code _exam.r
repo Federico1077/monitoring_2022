@@ -31,7 +31,38 @@ plot(snow20200321, col=cl)
 # I find what to put in the "fill section" of geom_raster in the information of the file (name section)
 
 
-ggplot() + geom_raster(snow20200321, mapping = aes(x=x, y=y, fill= Snow.Water.Equivalent)) + scale_fill_viridis(option="")
+ggplot() + geom_raster(snow20200321, mapping = aes(x=x, y=y, fill= Snow.Water.Equivalent)) + scale_fill_viridis(option="viridis") + ggtitle("snow on 21 March 2020")
+
+# importing all the data together with lapply function
+# go to the folder to see what is the common pattern between the two images
+
+rlist <- list.files(pattern = "SWE5K")
+rlist # to see the complete name of the two files
+
+list_rast <- lapply(rlist,raster)
+list_rast # to have the information of the the two files all together
+
+# create a stack with the two files of the "list_rast" created before
+
+snowstack <- stack(list_rast)
+snowstack
+
+# I associate a name for each one of the the two files of the stack
+
+sendwinter <- snowstack$Snow.Water.Equivalent.1
+sendsummer <- snowstack$Snow.Water.Equivalent.2
+
+# make plots with ggplot and geom_raster of the two files
+
+ggplot() + geom_raster(sendwinter, mapping= aes(x=x, y=y, fill=Snow.Water.Equivalent.1)) + scale_fill_viridis(option="viridis") + ggtitle("snow cover on 31 march 2020")
+
+ggplot() + geom_raster(sendsummer, mapping= aes(x=x, y=y, fill=Snow.Water.Equivalent.1)) + scale_fill_viridis(option="viridis") + ggtitle("snow cover on 21 september 2020")
+
+
+
+
+
+
 
 
 
