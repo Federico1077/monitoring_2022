@@ -70,7 +70,43 @@ snowdif <- sendwinter - sendsummer
 cl <- colorRampPalette(c("blue","white","red"))(100)
 plot(snowdif, col=cl)
 
-#
+# Calculate the relationship between the ares covered by snow and and those that are not covered
+# Use the unsuperClass function to explain to the software wich are the pixels covered by snow abd wich not in the 2 images
+# do this for the image of 21 march 2020
+
+snow20200321c <- unsuperClass(snow20200321, nClasses=2)# we have two classes one is that relative to the snow cover and the other relative to that is not
+snow20200321c # to see the information 
+plot(snow20200321$map)
+freq(snow20200321c$map)# to see the frequency of the two classes
+# snowcover : 5841542, nosnowcover : 1358458
+S1 <- snowcover + nosnowcover
+
+# find the proportion of the two classes
+prop1 <- freq(snow20200321c$map) / s1
+total <- 7200000 # s1
+propsnow <- 5841542 / total
+propnosnow <- 1358458 / total
+propsnow = 0.8113253 # about 0.80 (80%)
+propnosnow = 0.1886747 # about 0.20 (20%)
+
+# Build a dataframe
+cover <- c("snow","nosnow")
+propsnow20200321 <- (0.8113253,0.1886747)
+proportionsnow20200321 <- data.frame(cover,propsnow20200321)
+ggplot(proportionsnow20200321, aes ( x = cover, y= propsnow20200321, color= cover)) + geom_bar( stat ="identity",fill ="white")
+
+# do the same for the image of 21 september 2020
+
+
+
+
+
+
+
+
+
+
+
 
 
 
