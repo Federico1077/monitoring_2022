@@ -65,6 +65,16 @@ p2 <- ggplot() + geom_raster(sendsummer, mapping= aes(x=x, y=y, fill=Snow.Water.
 # plot p1 over p2
 p1 / p2
 
+# Calculate the difference of energy(snow) between the condition on 21 march 2020 and 21 september 2020
+snowdif <- sendwinter - sendsummer
+cl <- colorRampPalette(c("blue","white","red"))(100)
+plot(snowdif, col=cl)
+
+#
+
+
+
+
 
 
 
