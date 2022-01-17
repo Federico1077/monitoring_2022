@@ -1,1 +1,42 @@
+# R code for uploading and visualizing Copernicus data in R
+# Datas are relatively to Criosphere and to be more precise they concern about the snow cover extent in the nothern emisphere. I use two satellite images from Copernicus to see the difference between the snow cover extent in march 2020 amd september 2020
+
+# All the library with the packages that we need
+
+library(raster)
+library(ncdf4) 
+library(ggplot2)
+library(viridis)
+library(RStoolbox)
+library(patchwork)
+
+# Set the working directory
+setwd("C:/lab/exam/") # windows
+
+# After the download of the data from Copernicus I put the two files in my lab folder. One is from 
+# Upload of the data from the lab folder in R with raster function
+
+snow20200321 <- raster("c_gls_SWE5K_202003210000_NHEMI_SSMIS_V1.0.2.nc")
+snow20200321 # to see the information of the file
+
+# use the function plot to see the file
+plot(snow20200321)
+
+# use different color for the plot with a different colorRampPalette
+cl <- colorRampPalette(c("darkblue","blue","light blue"))(100)
+plot(snow20200321, col=cl)
+
+# use ggplot function with viridis package to have more appropriate colors to have a good distinction beetween the different areas with different snow cover
+# use geom_raster function with ggplot to do the information of I want to do the plot spacifically,with aesthetics component ecc
+# I find what to put in the "fill section" of geom_raster in the information of the file (name section)
+
+
+ggplot() + geom_raster(snow20200321, mapping = aes(x=x, y=y, fill= Snow.Water.Equivalent)) + scale_fill_viridis(option="")
+
+
+
+
+
+
+
 
