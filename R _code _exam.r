@@ -65,17 +65,14 @@ p2 <- ggplot() + geom_raster(sendsummer, mapping= aes(x=x, y=y, fill=Snow.Water.
 # plot p1 over p2
 p1 / p2
 
-# Calculate the difference of energy(snow) between the condition on 21 march 2020 and 21 september 2020
+# Represent the difference of snow between the condition on 21 march 2020 and 21 september 2020
 snowdif <- sendwinter - sendsummer
 cl <- colorRampPalette(c("blue","white","red"))(100)
 plot(snowdif, col=cl)
 
 # plot the two images in one with plotRGB to see the wich area are is associated to 21 march 2020 and wich on 21 september 2020
-SNOW <- stack(sednwinter,sendsummer) # make a stack of the two images
-cl <- colorRampPalette(c("dark blue","blue","light blue"))(100)
-plot(snow, col= cl)
-SNOW # to see the name of the two files
-plotRGB(SNOW, r=1,g=1,b=2, stretch="lin") # 1= associated to the image of 21 march and 2 associated to the image of 21 september
+snowstack # to see the name of the two files
+plotRGB(snowstack, r=1,g=1,b=2, stretch="lin") # 1= associated to the image of 21 march and 2 associated to the image of 21 september
 
 # Calculate the relationship between the ares covered by snow ( snow and snow water equivalent) and and those that are not covered
 # Unsupervised classification with the use of unsuperClass function to explain to the software wich are the pixels covered by snow abd wich not in the 2 images
