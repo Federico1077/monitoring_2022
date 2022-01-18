@@ -1,6 +1,6 @@
 # R code for uploading and visualizing Copernicus data in R
-# Datas are relatively to Criosphere and to be more precise they concern about the snow cover extent in the nothern emisphere. I use two satellite images from Copernicus to see the difference between the snow cover extent in march 2020 amd september 2020
-
+# Datas are relatively to Criosphere and to be more precise they concern about the snow (snow and snow water equivalent) in the nothern emisphere. I use two satellite images from Copernicus to see the difference between the snow cover extent in march 2020 amd september 2020
+# I use only the name snow for the files to semplify, but for snow I mean "snow and snow water equivalent". I make this distinction because in the season of the two images there are snow and also the water equivalent to the melt of snow 
 # All the library with the packages that we need
 
 library(raster)
@@ -70,32 +70,64 @@ snowdif <- sendwinter - sendsummer
 cl <- colorRampPalette(c("blue","white","red"))(100)
 plot(snowdif, col=cl)
 
-# Calculate the relationship between the ares covered by snow and and those that are not covered
-# Use the unsuperClass function to explain to the software wich are the pixels covered by snow abd wich not in the 2 images
-# do this for the image of 21 march 2020
+# Calculate the relationship between the ares covered by snow ( snow and snow water equivalent) and and those that are not covered
+# Unsupervised classification with the use of unsuperClass function to explain to the software wich are the pixels covered by snow abd wich not in the 2 images
+# do this for the image of 21 march 2020 (sendwinter)
 
-snow20200321c <- unsuperClass(snow20200321, nClasses=2)# we have two classes one is that relative to the snow cover and the other relative to that is not
-snow20200321c # to see the information 
-plot(snow20200321$map)
-freq(snow20200321c$map)# to see the frequency of the two classes
-# snowcover : 5841542, nosnowcover : 1358458
-S1 <- snowcover + nosnowcover
+sendwinterc <- unsuperClass(sendwinter, nClasses=2)# we have two classes one is that relative to the snow cover and the other relative to that is not
+sendwinterc # to see the information 
+plot(sendwinterc$map)
+freq(sendwinterc$map)# to see the frequency of the two classes
+# snowcover : 5835798, nosnowcover : 1364202
+s1 <- 5835798 + 1364202
+s1 # find the total value of pixels (7200000)
 
 # find the proportion of the two classes
-prop1 <- freq(snow20200321c$map) / s1
+prop1 <- freq(sendwinterc$map) / s1
 total <- 7200000 # s1
-propsnow <- 5841542 / total
-propnosnow <- 1358458 / total
-propsnow = 0.8113253 # about 0.80 (80%)
-propnosnow = 0.1886747 # about 0.20 (20%)
+propsnow <- 5835798 / total
+propnosnow <- 1364202 / total
+propsnow = 0.8105275 # about 0.81 (81%)
+propnosnow = 0.1894725 # about 0.19 (19%)
 
 # Build a dataframe
 cover <- c("snow","nosnow")
-propsnow20200321 <- (0.8113253,0.1886747)
-proportionsnow20200321 <- data.frame(cover,propsnow20200321)
-ggplot(proportionsnow20200321, aes ( x = cover, y= propsnow20200321, color= cover)) + geom_bar( stat ="identity",fill ="white")
+propsendwinter <- c(0.8105275,0.1894725)
+proportionsendwinter <- data.frame(cover,propsendwinter)
+ggplot(proportionsendwinter, aes ( x = cover, y= propsendwinter, color= cover)) + geom_bar( stat ="identity",fill ="white")
 
-# do the same for the image of 21 september 2020
+# do the same for the image of 21 september 2020 (sendsummer)
+
+sendsummerc <- unsuperClass(sendsummer, nClasses=2)# we have two classes one is that relative to the snow cover and the other relative to that is not
+sendsummerc # to see the information 
+plot(sendsummerc$map)
+freq(sendsummerc$map)# to see the frequency of the two classes
+# snow cover : 82720 , nosnowcover : 7117280
+
+s2 <- 82720 + 7117280
+s2 # 7200000
+
+prop2 <- freq(sendsummerc$map) / s2
+total <- 7200000 # s2
+propsnow2 <- 82720 / total
+propnosnow2 <- 7117280 / total
+propsnow2 = 0.01148889 # about 0.01 (1%)
+propnosnow2 = 0.9885111 # about 0.19 (99%)
+
+# Build a dataframe
+cover <- c("snow2","nosnow2")
+propsendsummer <- c(0.01148889,0.9885111)
+proportionsendsummer <- data.frame(cover,propsendsummer)
+ggplot(proportionsendsummer, aes ( x = cover, y= propsendsummer, color= cover)) + geom_bar( stat ="identity",fill ="white")
+
+
+
+
+
+
+
+
+
 
 
 
