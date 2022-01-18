@@ -159,6 +159,24 @@ abline(0,1, col= "red") # we see no correlation beetween the data because the ra
 
 pairs(snowstack)
 
+# I can crop an image of a certain area. I choose the north Europe area (Norway,Sweden) that is an area in wich there is a big change in snow from 21 march 2020 to 21 september
+
+# longitude is from 0 to 50
+# latitude is from 55 to 75
+
+ext <- c(0,50,55,75)
+
+# use crop function 
+sendwinter_cropped <- crop(sendwinter, ext)
+sendsummer_cropped <- crop(sendsummer, ext)
+
+# plot the area in the two different periods together 
+
+p1 <- ggplot() + geom_raster(sendwinter_cropped, mapping= aes(x=x, y=y, fill=Snow.Water.Equivalent.1)) + scale_fill_viridis(option="viridis") + ggtitle("snow cover on 21 march 2020")
+p2 <- ggplot() + geom_raster(sendsummer_cropped, mapping= aes(x=x, y=y, fill=Snow.Water.Equivalent.2)) + scale_fill_viridis(option="viridis") + ggtitle("snow cover on 21 september 2020")
+
+p1 / p2
+
 
 
 
