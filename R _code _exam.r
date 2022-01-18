@@ -3,12 +3,12 @@
 # I use only the name snow for the files to semplify, but for snow I mean "snow and snow water equivalent". I make this distinction because in the season of the two images there are snow and also the water equivalent to the melt of snow 
 # All the library with the packages that we need
 
-library(raster)
-library(ncdf4) 
-library(ggplot2)
-library(viridis)
-library(RStoolbox)
-library(patchwork)
+library(raster) # for upload the file from the labo folder to R
+library(ncdf4) # for open and read satellite images in R
+library(ggplot2) # for plotting file and data
+library(viridis) # for using viridis palette for the plot
+library(RStoolbox) # for the analisy,elaboration of the data and graphical visualization 
+library(patchwork) # for rappresenting two o more plot together
 
 # Set the working directory
 setwd("C:/lab/exam/") # windows
@@ -149,7 +149,17 @@ p2 <- ggplot(proportion, aes(x=cover, y=propsendsummer, color=cover)) + geom_bar
 p1 / p2
 
 
-# 
+# Do the dispersion graph with the correlation between the data of 21 march 2020 and those of 21 september 2020
+# use abline function for this
+
+plot(sendwinter,sendsummer)
+abline(0,1, col= "red") # we see no correlation beetween the data because the rappresent quite opposite situation
+
+# use the pairs function to have dispersion graph and histograms all together
+
+pairs(snowstack)
+
+
 
 
 
