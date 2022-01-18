@@ -58,9 +58,9 @@ ggplot() + geom_raster(sendwinter, mapping= aes(x=x, y=y, fill=Snow.Water.Equiva
 
 ggplot() + geom_raster(sendsummer, mapping= aes(x=x, y=y, fill=Snow.Water.Equivalent.2)) + scale_fill_viridis(option="viridis") + ggtitle("snow cover on 21 september 2020")
 
-# use the patchwork function to plot the two images together
-p1 <- ggplot() + geom_raster(sendwinter, mapping= aes(x=x, y=y, fill=Snow.Water.Equivalent.1)) + scale_fill_viridis(option="viridis") + ggtitle("snow cover on 21 march 2020")
-p2 <- ggplot() + geom_raster(sendsummer, mapping= aes(x=x, y=y, fill=Snow.Water.Equivalent.2)) + scale_fill_viridis(option="viridis") + ggtitle("snow cover on 21 september 2020")
+# use the patchwork package to plot the two images together
+p1 <- ggplot() + geom_raster(sendwinter, mapping= aes(x=x, y=y, fill=Snow.Water.Equivalent.1)) + scale_fill_viridis(option="viridis") + ggtitle("snow on 21 march 2020")
+p2 <- ggplot() + geom_raster(sendsummer, mapping= aes(x=x, y=y, fill=Snow.Water.Equivalent.2)) + scale_fill_viridis(option="viridis") + ggtitle("snow on 21 september 2020")
 
 # plot p1 over p2
 p1 / p2
@@ -148,7 +148,9 @@ p2 <- ggplot(proportion, aes(x=cover, y=propsendsummer, color=cover)) + geom_bar
 # plotting p1 over p2
 p1 / p2
 
-
+# calculate the difference of snow between the two images : 0.8105275 - 0.01148889
+dif <- 0.8105275 - 0.01148889
+dif # 0.7990386 = about 80% of snow loss
 # Do the dispersion graph with the correlation between the data of 21 march 2020 and those of 21 september 2020
 # use abline function for this
 
