@@ -9,7 +9,6 @@ library(ggplot2)
 library(viridis)
 library(RStoolbox)
 library(patchwork)
-library(gridExtra) # for use of grind.arrange to plot two histograms together
 
 # Set the working directory
 setwd("C:/lab/exam/") # windows
@@ -128,7 +127,29 @@ propsendsummer <- c(0.01148889,0.9885111)
 proportionsendsummer <- data.frame(cover,propsendsummer)
 ggplot(proportionsendsummer, aes ( x = cover, y= propsendsummer, color= cover)) + geom_bar( stat ="identity",fill ="white")
 
+# build a dataframe fot having a proportion between the data of the two images
+cover <- c("snow","nosnow")
+propsendwinter <- c(propsnow,propnosnow)
+propsendsummer <- c(propsnow2,propnosnow2)
 
+proportion <- data.frame(cover,propsendwinter,propsendsummer)
+proportion # to see the proportion of two images together
+
+# plot the proportion
+ggplot(proportion, aes(x=cover, y=propsendwinter, color=cover)) + geom_bar(stat="identity",fill="white") + ylim(0,1)
+
+ggplot(proportion, aes(x=cover, y=propsendsummer, color=cover)) + geom_bar(stat="identity",fill="white") + ylim(0,1)
+
+# plotting all the two histograms together with patchwork package
+
+p1 <- ggplot(proportion, aes(x=cover, y=propsendwinter, color=cover)) + geom_bar(stat="identity",fill="white") + ylim(0,1)
+p2 <- ggplot(proportion, aes(x=cover, y=propsendsummer, color=cover)) + geom_bar(stat="identity",fill="white") + ylim(0,1)
+
+# plotting p1 over p2
+p1 / p2
+
+
+# 
 
 
 
