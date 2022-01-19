@@ -49,8 +49,8 @@ snowstack
 
 # I associate a name for each one of the the two files of the stack
 
-sendwinter <- snowstack$Snow.Water.Equivalent.1
-sendsummer <- snowstack$Snow.Water.Equivalent.2
+sendwinter <- snowstack$Snow.Water.Equivalent.1 # sendwinter = snow in the end of the winter
+sendsummer <- snowstack$Snow.Water.Equivalent.2 # sendsummer = snow in the end of the summer
 
 # make plots with ggplot and geom_raster of the two files
 
