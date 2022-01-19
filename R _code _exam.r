@@ -74,7 +74,7 @@ plot(snowdif, col=cl)
 snowstack # to see the name of the two files
 plotRGB(snowstack, r=1,g=1,b=2, stretch="lin") # 1= associated to the image of 21 march and 2 associated to the image of 21 september
 
-# Calculate the relationship between the ares covered by snow ( snow and snow water equivalent) and and those that are not covered
+# Calculate the relationship between the ares covered by snow ( snow and snow water equivalent) and those that are not covered
 # Unsupervised classification with the use of unsuperClass function to explain to the software wich are the pixels covered by snow abd wich not in the 2 images
 # do this for the image of 21 march 2020 (sendwinter)
 
