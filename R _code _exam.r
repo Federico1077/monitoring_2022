@@ -124,7 +124,7 @@ propsendsummer <- c(0.01148889,0.9885111)
 proportionsendsummer <- data.frame(cover,propsendsummer)
 ggplot(proportionsendsummer, aes ( x = cover, y= propsendsummer, color= cover)) + geom_bar( stat ="identity",fill ="white")
 
-# build a dataframe fot having a proportion between the data of the two images
+# build a dataframe fot having a proportion of the data of the two images together
 cover <- c("snow","nosnow")
 propsendwinter <- c(propsnow,propnosnow)
 propsendsummer <- c(propsnow2,propnosnow2)
